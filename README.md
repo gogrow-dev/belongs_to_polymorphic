@@ -49,6 +49,18 @@ Class:
 Instance:
 -  `book.owner_type_#{allowed_class_name}?`: check if it is from that specific class
 
+### Usage with namespaced models
+
+```ruby
+class Book < ActiveRecord::Base
+    belongs_to_polymorphic :owner, allowed_classes: [Publisher::Person, Publisher]
+end
+```
+
+It will allow you to use:
+- `Book.with_owner(Publisher::Person)`
+- `Book.with_owner_publisher_person`
+- `book.owner_type_publisher_person?`
 
 ## License
 
