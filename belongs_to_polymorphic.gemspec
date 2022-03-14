@@ -23,10 +23,8 @@ Gem::Specification.new do |s|
   s.require_paths = ['lib']
   s.add_development_dependency 'activerecord', '>= 5.0.0'
   s.add_development_dependency 'rake'
-  s.add_development_dependency 'reek'
   s.add_development_dependency 'rspec'
-  s.add_development_dependency 'rubocop-rootstrap'
   s.add_development_dependency 'simplecov', '~> 0.17.1'
 
-  s.add_runtime_dependency 'activerecord', '>= 5.2', '< 7.1'
+  s.add_runtime_dependency 'activerecord', '>= 5.2', '< 8.0'
 end
