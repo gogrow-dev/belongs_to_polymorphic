@@ -3,7 +3,7 @@
 An ActiveRecord extension defining the concept *belongs to polymorphic*, which allows us to use polymorphic associations (belongs_to) and restrict which classes are allowed to be related to.
 
 
-The base idea and code was taken from this blogpost: [Improve ActiveRecord Polymorphic Associations - Head of engineering at Product Hunt](https://blog.rstankov.com/allowed-class-names-in-activerecord-polymorphic-associations/).
+The base idea was taken from this blogpost: [Improve ActiveRecord Polymorphic Associations - Head of engineering at Product Hunt](https://blog.rstankov.com/allowed-class-names-in-activerecord-polymorphic-associations/).
 
 ## Installation
 
@@ -27,16 +27,16 @@ In your model you can do the following:
 
 ```ruby
 class Book < ActiveRecord::Base
-    belongs_to_polymorphic :owner, allowed_classes: [Person, Publisher]
+    belongs_to_polymorphic :owner, allowed_classes: [User, Publisher]
 end
 ```
 
 You can also add any options that a regular `belongs_to` with `polymorphic: true` could use.
 
-By using this you create a polymorphic relationship in `Book` called `contents` which can be a `Person` or a `Publisher`.
+By using this you create a polymorphic relationship in `Book` called `owner` which can be a `User` or a `Publisher`.
 If you try to set an `owner` from a class rather than the aforementioend ones, it will return the following error:
 ```ruby
-#<ActiveModel::Error attribute=profile_type, type=inclusion, options={:value=>"IncorrectModel"}>
+#ActiveRecord::RecordInvalid: Validation failed: Owner type OtherThing class is not an allowed class.
 ```
 
 It also automatically adds some helpers
@@ -53,14 +53,14 @@ Instance:
 
 ```ruby
 class Book < ActiveRecord::Base
-    belongs_to_polymorphic :owner, allowed_classes: [Publisher::Person, Publisher]
+    belongs_to_polymorphic :owner, allowed_classes: [Publisher::User, Publisher]
 end
 ```
 
 It will allow you to use:
-- `Book.with_owner(Publisher::Person)`
-- `Book.with_owner_publisher_person`
-- `book.owner_type_publisher_person?`
+- `Book.with_owner(Publisher::User)`
+- `Book.with_owner_publisher_user`
+- `book.owner_type_publisher_user?`
 
 ## License
 
