@@ -62,6 +62,18 @@ It will allow you to use:
 - `Book.with_owner_publisher_user`
 - `book.owner_type_publisher_user?`
 
+## I18n
+
+Belongs to Polymoprhic uses I18n to define the not allowed class error. To customize it, you can set up your locale file:
+
+```yaml
+en:
+  belongs_to_polymoprhic:
+    errors:
+      messages:
+        class_not_allowed: "%{class} is not an allowed class"
+```
+
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
