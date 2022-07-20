@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.description   = s.summary
   s.authors       = ['Nicolas Erlichman']
   s.email         = ['hello@gogrow.dev']
-  s.homepage      = 'https://github.com/gogrow-dev/belongs_to_polymorphic'
+  s.homepage      = 'https://gogrow.dev'
 
   s.metadata['source_code_uri'] = s.homepage
   s.metadata['rubygems_mfa_required'] = 'true'
