@@ -8,8 +8,9 @@ module BelongsToPolymorphic
 
     module ClassMethods
       def belongs_to_polymorphic(name, allowed_classes:, **options)
-        allowed_classes = Array.new(allowed_classes)
+        allowed_classes = Array.wrap(allowed_classes)
         belongs_to name, polymorphic: true, **options
+
         validates "#{name}_type", inclusion: {
           in: classes(allowed_classes, options),
           message: I18n.t('belongs_to_polymorphic.errors.messages.class_not_allowed',
