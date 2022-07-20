@@ -12,7 +12,8 @@ module BelongsToPolymorphic
         belongs_to name, polymorphic: true, **options
         validates "#{name}_type", inclusion: {
           in: classes(allowed_classes, options),
-          message: '%<value>s is not an allowed class'
+          message: I18n.t('belongs_to_polymorphic.errors.messages.class_not_allowed',
+                          class: '%<value>s')
         }
 
         define_singleton_method("#{name}_types") { allowed_classes }
