@@ -31,3 +31,7 @@ jobs:
         run: bundle exec rubocop
       - name: Run specs
         run: bundle exec rspec
+      - name: Upload code coverage
+        uses: paambaati/codeclimate-action@v3.0.0
+        env:
+          CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}

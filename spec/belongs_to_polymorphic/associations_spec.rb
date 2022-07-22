@@ -48,14 +48,30 @@ RSpec.describe 'Belongs to Polymorphic Association' do
     let!(:publisher_book) { Book.create(title: 'Publisher Book', owner: Publisher.first) }
 
     describe '#finder_methods' do
-      it 'should return the books with the given owner type count' do
-        expect(Book.with_owner_user.count).to eq(1)
-        expect(Book.with_owner_publisher.count).to eq(1)
+      context 'when searching by class' do
+        it 'should return the books with the given owner type count' do
+          expect(Book.with_owner(User).count).to eq(1)
+          expect(Book.with_owner(Publisher).count).to eq(1)
+        end
+
+        it 'should return the books with the given owner type' do
+          expect(Book.with_owner(User).first).to eq(user_book)
+          expect(Book.with_owner(Publisher).first).to eq(publisher_book)
+        end
       end
 
-      it 'should return the books with the given owner type' do
-        expect(Book.with_owner_user.first).to eq(user_book)
-        expect(Book.with_owner_publisher.first).to eq(publisher_book)
+      context 'when searching by string' do
+        it 'should return the books with the given owner type count' do
+          expect(Book.with_owner('User').count).to eq(1)
+          expect(Book.with_owner('Publisher').count).to eq(1)
+        end
+      end
+
+      context 'when searching by instance of class' do
+        it 'should return the books with the given owner type count' do
+          expect(Book.with_owner(User.first).count).to eq(1)
+          expect(Book.with_owner(Publisher.first).count).to eq(1)
+        end
       end
     end
 

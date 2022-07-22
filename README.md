@@ -1,4 +1,8 @@
 # Belongs to Polymorphic
+[![Gem Version](https://badge.fury.io/rb/belongs_to_polymorphic.svg)](https://badge.fury.io/rb/belongs_to_polymorphic)
+[![Ruby](https://github.com/gogrow-dev/belongs_to_polymorphic/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/gogrow-dev/belongs_to_polymorphic/actions/workflows/main.yml)
+[![Maintainability](https://api.codeclimate.com/v1/badges/1e3960d9aa00b8328a30/maintainability)](https://codeclimate.com/github/gogrow-dev/belongs_to_polymorphic/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/1e3960d9aa00b8328a30/test_coverage)](https://codeclimate.com/github/gogrow-dev/belongs_to_polymorphic/test_coverage)
 
 An ActiveRecord extension defining the concept *belongs to polymorphic*, which allows us to use polymorphic associations (belongs_to) and restrict which classes are allowed to be related to.
 
