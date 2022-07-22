@@ -13,6 +13,7 @@ Gem::Specification.new do |s|
   s.authors       = ['Nicolas Erlichman']
   s.email         = ['hello@gogrow.dev']
   s.homepage      = 'https://gogrow.dev'
+  s.required_ruby_version = '>= 2.5'
 
   s.metadata['source_code_uri'] = s.homepage
   s.metadata['rubygems_mfa_required'] = 'true'
@@ -23,10 +24,4 @@ Gem::Specification.new do |s|
   s.require_paths = ['lib']
 
   s.add_dependency 'activerecord', '>= 5.2', '< 8.0'
-
-  s.add_development_dependency 'database_cleaner-active_record', '~> 1.8.0'
-  s.add_development_dependency 'rake', '~> 13.0.6'
-  s.add_development_dependency 'rspec', '~> 3.11.0'
-  s.add_development_dependency 'simplecov', '~> 0.17.1'
-  s.add_development_dependency 'sqlite3', '~> 1.4.2'
 end

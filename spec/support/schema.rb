@@ -23,7 +23,5 @@ ActiveRecord::Schema.define do
     t.timestamps
   end
 
-  create_table :other_things, force: true do |t|
-    t.timestamps
-  end
+  create_table :other_things, force: true, &:timestamps
 end
