@@ -4,7 +4,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/1e3960d9aa00b8328a30/maintainability)](https://codeclimate.com/github/gogrow-dev/belongs_to_polymorphic/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/1e3960d9aa00b8328a30/test_coverage)](https://codeclimate.com/github/gogrow-dev/belongs_to_polymorphic/test_coverage)
 
-An ActiveRecord extension defining the concept *belongs to polymorphic*, which allows us to use polymorphic associations (belongs_to) and restrict which classes are allowed to be related to.
+An ActiveRecord extension which allows us to use polymorphic associations (belongs_to) and validating which classes are allowed to be related to, while also adding some helper methods.
 
 
 The base idea was taken from this blogpost: [Improve ActiveRecord Polymorphic Associations - Head of engineering at Product Hunt](https://blog.rstankov.com/allowed-class-names-in-activerecord-polymorphic-associations/).
@@ -31,11 +31,11 @@ In your model you can do the following:
 
 ```ruby
 class Book < ActiveRecord::Base
-    belongs_to_polymorphic :owner, allowed_classes: [User, Publisher]
+    belongs_to :owner, polymorphic: [User, Publisher]
 end
 ```
 
-You can also add any options that a regular `belongs_to` with `polymorphic: true` could use.
+You will use a `belongs_to` relatinoship as always, with the only change being that besides just indicating `polymorphic: true` you could specify the allowed polymorphic classes.
 
 By using this you create a polymorphic relationship in `Book` called `owner` which can be a `User` or a `Publisher`.
 If you try to set an `owner` from a class rather than the aforementioend ones, it will return the following error:
@@ -57,7 +57,7 @@ Instance:
 
 ```ruby
 class Book < ActiveRecord::Base
-    belongs_to_polymorphic :owner, allowed_classes: [Publisher::User, Publisher]
+    belongs_to :owner, polymorphic: [Publisher::User, Publisher]
 end
 ```
 

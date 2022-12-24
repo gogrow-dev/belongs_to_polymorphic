@@ -3,5 +3,5 @@
 class Book < ActiveRecord::Base
   validates :title, presence: true
 
-  belongs_to_polymorphic :owner, allowed_classes: [Publisher, User]
+  belongs_to :owner, polymorphic: [Publisher, User]
 end
