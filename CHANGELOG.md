@@ -34,3 +34,7 @@ class User < ApplicationRecord
   belongs_to :profile, polymorphic: [Person, Company]
 end
 ```
+
+## [0.2.1] - 2022-12-27
+
+- Fixed bundled gem size
