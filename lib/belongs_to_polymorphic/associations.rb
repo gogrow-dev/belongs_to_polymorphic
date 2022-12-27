@@ -4,15 +4,23 @@ module BelongsToPolymorphic
   module Associations
     def self.included(base)
       base.extend ClassMethods
+      class << base
+        alias_method :default_belongs_to, :belongs_to
+        alias_method :belongs_to, :belongs_to_polymorphic
+      end
     end
 
     module ClassMethods
-      def belongs_to_polymorphic(name, allowed_classes:, **options)
-        allowed_classes = Array.wrap(allowed_classes)
-        belongs_to name, polymorphic: true, **options
+      def belongs_to_polymorphic(name, **options)
+        default_belongs_to name, **options
+        polymorphic = options[:polymorphic]
+
+        return unless polymorphic.present? && polymorphic.class != TrueClass
+
+        allowed_classes = classify(polymorphic)
 
         validates "#{name}_type", inclusion: {
-          in: classes(allowed_classes, options),
+          in: inclusion_classes(allowed_classes, options[:optional]),
           message: I18n.t('belongs_to_polymorphic.errors.messages.class_not_allowed',
                           class: '%<value>s')
         }
@@ -24,9 +32,27 @@ module BelongsToPolymorphic
 
       private
 
-      def classes(allowed_classes, options)
+      def classify(classes)
+        Array.wrap(classes).map do |klass|
+          case klass
+          when Class then klass
+          else constantize(klass)
+          end
+        end
+      end
+
+      def constantize(klass)
+        const_class = case klass
+                      when String then klass
+                      when Symbol then klass.to_s
+                      else type.class.name
+                      end
+        const_class.classify.constantize
+      end
+
+      def inclusion_classes(allowed_classes, optional)
         classes = allowed_classes.map(&:name)
-        classes << nil if options[:optional]
+        classes << nil if optional.present?
         classes
       end
 

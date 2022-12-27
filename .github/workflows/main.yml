@@ -26,9 +26,11 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
-          bundler-cache: true
+          bundler-cache: false
+      - run: bundle config set --local with 'test'
+      - run: bundle install
       - name: Lint with rubocop
-        run: bundle exec rubocop
+        run: bundle exec rubocop --parallel
       - name: Run specs
         run: bundle exec rspec
       - name: Upload code coverage
