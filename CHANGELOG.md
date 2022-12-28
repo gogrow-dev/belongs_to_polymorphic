@@ -38,3 +38,8 @@ end
 ## [0.2.1] - 2022-12-27
 
 - Fixed bundled gem size
+
+## [0.2.99] - 2022-12-28
+
+- Add deprecation message
+

@@ -8,6 +8,11 @@ Gem::Specification.new do |s|
   s.licenses      = ['MIT']
   s.authors       = ['Nicolas Erlichman']
   s.email         = ['hello@gogrow.dev']
+  s.post_install_message = <<-MESSAGE
+ !    The `belongs_to_polymoprhic` gem has been deprecated and has been replaced by `safe_polymorphic`.
+ !    See: https://rubygems.org/gems/safe_polymorphic
+ !    And: https://github.com/gogrow-dev/safe_polymorphic
+  MESSAGE
 
   s.summary       = 'ActiveRecord extension - ' \
                     'Polymorphic associations with restricted allowed classes.'
